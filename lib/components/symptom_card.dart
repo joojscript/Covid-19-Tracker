@@ -38,7 +38,7 @@ class SymptomCard extends StatelessWidget {
         children: [
           Image.asset(
             this.imageAssetURL,
-            height: 90,
+            height: 70,
           ),
           Text(
             this.title,

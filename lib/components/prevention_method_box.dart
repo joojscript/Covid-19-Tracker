@@ -56,7 +56,7 @@ class PreventionMethodBox extends StatelessWidget {
                     Text(
                       this.text,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 10,
                       ),
                     ),
                     Align(
