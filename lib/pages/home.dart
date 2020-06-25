@@ -1,13 +1,22 @@
 import 'package:covid_19_tracker/constant.dart';
+import 'package:covid_19_tracker/utils/web_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../components/counter.dart';
 import '../components/header.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String _selectedCountry = "Brazil";
+
   @override
   Widget build(BuildContext context) {
+    WebHelper.getCountriesList();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -16,44 +25,54 @@ class Home extends StatelessWidget {
               textWithBreaks: "All you need \nis to stay \nat home.",
               imageAssetURL: "assets/icons/Drcorona.svg",
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              height: 60,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(
-                  color: Color(0xFFE5E5E5),
-                ),
-              ),
-              child: Row(
-                children: [
-                  SvgPicture.asset("assets/icons/maps-and-flags.svg"),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: DropdownButton(
-                      icon: SvgPicture.asset("assets/icons/dropdown.svg"),
-                      isExpanded: true,
-                      underline: SizedBox(),
-                      value: "Indonesia",
-                      items: [
-                        "Indonesia",
-                        "Bangladesh",
-                        "United States",
-                        "Japan"
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (value) {},
+            FutureBuilder<List<dynamic>>(
+              future: WebHelper.getCountriesList(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Color(0xFFE5E5E5),
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset("assets/icons/maps-and-flags.svg"),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: DropdownButton(
+                            icon: SvgPicture.asset("assets/icons/dropdown.svg"),
+                            isExpanded: true,
+                            underline: SizedBox(),
+                            value: _selectedCountry,
+                            items: snapshot.data
+                                .map<DropdownMenuItem<String>>((dynamic value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                this._selectedCountry = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
             ),
             SizedBox(height: 20),
             Padding(
@@ -99,17 +118,17 @@ class Home extends StatelessWidget {
                         Counter(
                           color: kInfectedColor,
                           title: "Infected",
-                          number: 1046,
+                          country: this._selectedCountry,
                         ),
                         Counter(
                           color: kDeathColor,
                           title: "Deaths",
-                          number: 87,
+                          country: this._selectedCountry,
                         ),
                         Counter(
                           color: kRecovererColor,
                           title: "Recovered",
-                          number: 46,
+                          country: this._selectedCountry,
                         ),
                       ],
                     ),
