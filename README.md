@@ -11,6 +11,6 @@ For this third step, I used an free API that I found on [RapidAPI](https://rapid
 <p align="center"><img src=".github/screens.png?raw=true"/></p>
 
 <h1 align="center">
-<img align="center"><img src=".github/screen1.gif?raw=true" width="450" height="800"/>
-<img align="center"><img src=".github/screen2.gif?raw=true" width="450" height="800"/>
+<img align="center"><img src=".github/screen1.gif?raw=true" width="350" height="700"/>
+<img align="center"><img src=".github/screen2.gif?raw=true" width="350" height="700"/>
 </h1>
