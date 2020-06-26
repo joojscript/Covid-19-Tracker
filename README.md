@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="assets/images/wear_mask.png" />
+  <img src="assets/images/wear_mask.png" /><br />
   💉 COVID-19 Tracker 💉
 </h1>
 <br />
