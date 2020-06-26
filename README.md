@@ -1,6 +1,7 @@
 <h1 align="center">
-  💉 COVID-19 Tracker
+  💉 COVID-19 Tracker 💉
 </h1>
+<br />
 
 Hello! Welcome to a real time **COVID-19** tracker made with [Flutter](https://flutter.dev/ "Flutter"). I started this project by watching the original step by step designing of *[Flutter Way](https://www.youtube.com/channel/UCJm7i4g4z7ZGcJA_HKHLCVw "Flutter Way")*, but as I ended watching the original video, I was able to find some inconsistencies into the code (unresponsive scales, for instance). Then I decided to make this project, by following these steps:
 
